@@ -5,7 +5,7 @@ import express from "express";
 const server = express();
 
 server.get('/', function (req, res) {
-  res.send('SHIBTracker')
+  res.send('RonTracker')
 });
 
 function keepAlive() {
@@ -33,7 +33,7 @@ client.once("ready", () => {
 
   setInterval(async () => {
     getPrice();
-    BOT.user.setActivity("SHIB: " + lastPrice);
+    BOT.user.setActivity("RON: " + lastPrice);
   }, 5000);
 });
 
