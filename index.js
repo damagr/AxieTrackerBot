@@ -1,6 +1,7 @@
 import { Client, Intents } from "discord.js";
 import axios from "axios";
 import express from "express";
+const {prefix, ron, axs, slp, tokenArray, urlArray} = require('./config.json');
 
 const server = express();
 
@@ -14,10 +15,6 @@ function keepAlive() {
   });
 }
 
-const ron = "https://api.coingecko.com/api/v3/simple/price?ids=ronin&vs_currencies=usd";
-const axs = "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd";
-const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd";
-const tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
 const urlArray = [axs, slp, ron];
 let lastPrice;
 let lastToken;
@@ -44,6 +41,22 @@ client.once("ready", () => {
   }, 7500);
 });
 
+client.on("message", message =>{
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+  if(message.content.startsWith(`${prefix}axs`)){
+    getFastPrice(0);
+  }else if (message.content.startsWith(`${prefix}slp`)) {
+    getFastPrice(1);
+  }else if (message.content.startsWith(`${prefix}ron`)) {
+    getFastPrice(2);
+  }else if(message.content.startsWith(`${prefix}help`)){
+    message.channel.send("```\n - ?axs - Devuelve el precio del AXS. \n - ?slp - Devuelve el precio del SLP. \n - ?ron - Devuelve el precio del RON. \n - ?help - Muestra todos los comandos disponibles```");
+  }else{
+    message.channel.send("Comando inválido, prueba a utilizar ?help para obtener los comandos disponibles.");
+  }
+});
+
 function getPrice() {
   aux == 3 ? aux = 0 : '';
   axios.get(urlArray[aux]).then((response) => {
@@ -57,6 +70,12 @@ function getPrice() {
       lastTokenID = 'RON'
     }
     aux++;
+  });
+}
+
+function getFastPrice(token){
+  axios.get(urlArray[token]).then((response)=>{
+
   });
 }
 

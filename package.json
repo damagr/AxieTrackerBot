@@ -1,6 +1,6 @@
 {
-  "name": "AxieTracker",
-  "version": "2.0.0",
+  "name": "axietracker",
+  "version": "2.1.0",
   "description": "AxieTracker",
   "main": "index.js",
   "scripts": {
