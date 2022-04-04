@@ -18,9 +18,10 @@ const ron = "https://api.coingecko.com/api/v3/simple/price?ids=ronin&vs_currenci
 const axs = "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd";
 const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd";
 const tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
-const urlArray = [ron, axs, slp];
+const urlArray = [axs, slp, ron];
 let lastPrice;
 let lastToken;
+let lastTokenID;
 let aux = 0;
 
 const client = new Client({
@@ -39,15 +40,22 @@ client.once("ready", () => {
 
   setInterval(async () => {
     getPrice();
-    BOT.user.setActivity(lastToken + " " + lastPrice + '$', { type: "WATCHING" }).catch(console.error);
-  }, 5000);
+    BOT.user.setActivity(lastTokenID + " " + lastPrice + '$', { type: "WATCHING" }).catch(console.error);
+  }, 7500);
 });
 
 function getPrice() {
-  aux == 2 ? aux = 0 : '';
+  aux == 3 ? aux = 0 : '';
   axios.get(urlArray[aux]).then((response) => {
     lastToken = tokenArray[aux];
     lastPrice = response.data[lastToken]['usd'];
+    if(aux == 0){
+      lastTokenID = 'AXS'
+    }else if(aux == 1){
+      lastTokenID = 'SLP'
+    }else{
+      lastTokenID = 'RON'
+    }
     aux++;
   });
 }
