@@ -17,10 +17,10 @@ function keepAlive() {
 const ron = "https://api.coingecko.com/api/v3/simple/price?ids=ronin&vs_currencies=usd";
 const axs = "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd";
 const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd";
+const tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
+const urlArray = [ron, axs, slp];
 let lastPrice;
 let lastToken;
-let tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
-let urlArray = [ron, axs, slp];
 let aux = 0;
 
 const client = new Client({
