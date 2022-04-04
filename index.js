@@ -23,6 +23,8 @@ const urlArray = [axs, slp, ron];
 let lastPrice;
 let lastToken;
 let lastTokenID;
+let newToken;
+let respuesta;
 let aux = 0;
 
 const client = new Client({
@@ -49,13 +51,13 @@ client.on("message", message =>{
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
   if(message.content.startsWith(`${prefix}axs`)){
-    getFastPrice(0,);
+    getFastPrice(0, message);
   }else if (message.content.startsWith(`${prefix}slp`)) {
-    getFastPrice(1);
+    getFastPrice(1, message)
   }else if (message.content.startsWith(`${prefix}ron`)) {
-    getFastPrice(2);
+    getFastPrice(2, message)
   }else if(message.content.startsWith(`${prefix}help`)){
-    message.channel.send("```\n - ?axs - Devuelve el precio del AXS. \n - ?slp - Devuelve el precio del SLP. \n - ?ron - Devuelve el precio del RON. \n - ?help - Muestra todos los comandos disponibles```");
+    message.channel.send("```md\n - ?axs - Devuelve el precio del AXS. \n - ?slp - Devuelve el precio del SLP. \n - ?ron - Devuelve el precio del RON. \n - ?help - Muestra todos los comandos disponibles```");
   }else{
     message.channel.send("Comando inválido, prueba a utilizar ?help para obtener los comandos disponibles.");
   }
@@ -77,9 +79,14 @@ function getPrice() {
   });
 }
 
-function getFastPrice(token){
+function getFastPrice(token, message){
   axios.get(urlArray[token]).then((response)=>{
-    message.channel.send("Aquí tienes: "+ response.data[tokenArray[token]]);
+    let id;
+    newToken = tokenArray[token];
+    if(token == 0) id = 'AXS';
+    else if (token == 1) id = 'SLP'
+    else id = 'RON'
+    message.channel.send("Hola " + message.author.username + "```md\nTokenID: " + id + "\nPrice: " + response.data[newToken]['usd'] + '$```');
   });
 }
 
