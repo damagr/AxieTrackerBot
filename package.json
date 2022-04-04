@@ -1,7 +1,7 @@
 {
-  "name": "ethereumtracker",
-  "version": "1.0.0",
-  "description": "ethereumtracker",
+  "name": "AxieTracker",
+  "version": "2.0.0",
+  "description": "AxieTracker",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
