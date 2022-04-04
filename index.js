@@ -5,7 +5,7 @@ import express from "express";
 const server = express();
 
 server.get('/', function (req, res) {
-  res.send('RONTracker')
+  res.send('AxieTracker')
 });
 
 function keepAlive() {
@@ -14,8 +14,13 @@ function keepAlive() {
   });
 }
 
-// const url = "https://api.coingecko.com/api/v3/simple/price?ids=  &vs_currencies=usd";
-let lastPrice = 'Soon...';
+const ron = "https://api.coingecko.com/api/v3/simple/price?ids=ronin&vs_currencies=usd";
+const axs = "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd";
+const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd";
+let lastPrice;
+let lastToken;
+let tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
+let aux = 0;
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS],
@@ -32,16 +37,19 @@ client.once("ready", () => {
   const BOT = guild.members.cache.get(BOT_ID);
 
   setInterval(async () => {
-    // getPrice();
-    BOT.user.setActivity("RON: " + lastPrice + '', { type: "WATCHING" }).catch(console.error);
-  }, 10000);
+    getPrice();
+    BOT.user.setActivity(lastToken + " " + lastPrice + '$', { type: "WATCHING" }).catch(console.error);
+  }, 5000);
 });
 
-// function getPrice() {
-//   axios.get(url).then((response) => {
-//     lastPrice = response.data[' ']['usd'];
-//   });
-// }
+function getPrice() {
+  axios.get(url).then((response) => {
+    aux == 2 ? aux = 0 : '';
+    lastToken = tokenArray[aux];
+    lastPrice = response.data[lastToken]['usd'];
+    aux++;
+  });
+}
 
 keepAlive();
 client.login(BOT_TOKEN);
