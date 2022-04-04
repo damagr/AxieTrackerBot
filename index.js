@@ -20,7 +20,7 @@ const axs = "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_
 const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd";
 const tokenArray = ['axie-infinity', 'smooth-love-potion', 'ronin'];
 const urlArray = [axs, slp, ron];
-const helpMessage = "```md\n - ?axs - Devuelve el precio del AXS. \n - ?slp - Devuelve el precio del SLP. \n - ?ron - Devuelve el precio del RON. \n - ?help - Muestra todos los comandos disponibles```";
+const helpMessage = "```md\n - ?axs - Devuelve el precio del AXS. \n - ?slp - Devuelve el precio del SLP. \n - ?ron - Devuelve el precio del RON. \n - ?help - Muestra todos los comandos disponibles.```";
 const errorMessage = "Comando inválido, prueba a utilizar ?help para obtener los comandos disponibles.";
 let lastPrice;
 let lastToken;
