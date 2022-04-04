@@ -1,7 +1,6 @@
 import { Client, Intents } from "discord.js";
 import axios from "axios";
 import express from "express";
-const {prefix, ron, axs, slp, tokenArray, urlArray} = require('./config.json');
 
 const server = express();
 
@@ -15,6 +14,11 @@ function keepAlive() {
   });
 }
 
+const prefix = "?";
+const ron = "https://api.coingecko.com/api/v3/simple/price?ids=ronin&vs_currencies=usd";
+const axs = "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd";
+const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd";
+const tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
 const urlArray = [axs, slp, ron];
 let lastPrice;
 let lastToken;
