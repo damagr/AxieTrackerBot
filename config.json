@@ -1,7 +1,0 @@
-{
-    "prefix": "?",
-    "axs": "https://api.coingecko.com/api/v3/simple/price?ids=axie-infinity&vs_currencies=usd",
-    "slp": "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=usd",
-    "ron": "https://api.coingecko.com/api/v3/simple/price?ids=ronin&vs_currencies=usd",
-    "tokenArray": "['axie-infinity','smooth-love-potion','ronin']"
-}
