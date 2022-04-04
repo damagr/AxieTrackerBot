@@ -49,7 +49,7 @@ client.on("message", message =>{
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
   if(message.content.startsWith(`${prefix}axs`)){
-    getFastPrice(0);
+    getFastPrice(0,);
   }else if (message.content.startsWith(`${prefix}slp`)) {
     getFastPrice(1);
   }else if (message.content.startsWith(`${prefix}ron`)) {
@@ -79,7 +79,7 @@ function getPrice() {
 
 function getFastPrice(token){
   axios.get(urlArray[token]).then((response)=>{
-
+    message.channel.send("Aquí tienes: "+ response.data[tokenArray[token]]);
   });
 }
 
