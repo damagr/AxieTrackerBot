@@ -20,6 +20,7 @@ const slp = "https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potio
 let lastPrice;
 let lastToken;
 let tokenArray = ['axie-infinity','smooth-love-potion','ronin'];
+let urlArray = [ron, axs, slp];
 let aux = 0;
 
 const client = new Client({
@@ -43,8 +44,8 @@ client.once("ready", () => {
 });
 
 function getPrice() {
-  axios.get(url).then((response) => {
-    aux == 2 ? aux = 0 : '';
+  aux == 2 ? aux = 0 : '';
+  axios.get(urlArray[aux]).then((response) => {
     lastToken = tokenArray[aux];
     lastPrice = response.data[lastToken]['usd'];
     aux++;
